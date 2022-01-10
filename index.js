@@ -45,6 +45,29 @@ async function run() {
         const result = await tourCollection.findOne(query);
         res.json(result)
     })
+
+
+    // post api for booking 
+    app.post('/booking', async(req,res)=>{
+        const booking = req.body;
+        const doc = {
+          name:booking.name,
+          email:booking.email,
+          title:booking.title,
+          date:booking.date,
+          address:booking.address
+        }
+        const result = await bookingCollection.insertOne(doc);
+        res.json(result)
+      })
+
+      
+    // all booking get api 
+    app.get('/allbooking', async(req,res)=>{
+        const cursor = bookingCollection.find({});
+        const result = await cursor.toArray();
+        res.json(result);
+      })
     
   
     } finally {
