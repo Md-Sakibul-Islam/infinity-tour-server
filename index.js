@@ -18,7 +18,7 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
-console.log(uri);
+
 
 async function run() {
     try {
@@ -27,6 +27,10 @@ async function run() {
       const tourCollection = database.collection("tour_collection");
       const bookingCollection = database.collection("booking_collection");
   
+      // Default GET API for Checking server 
+      app.get('/',(req,res)=>{
+        res.send('Infinity tour Sever is running ')
+      })
       
     // GET API
     // GETTING ALL TOURS DESTINATION
