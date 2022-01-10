@@ -68,6 +68,23 @@ async function run() {
         const result = await cursor.toArray();
         res.json(result);
       })
+
+      app.get('/mybooking/:email',async(req,res)=>{
+        const email = req.params.email
+        const query = {email:email}
+        const cursor =  bookingCollection.find(query);
+        const result = await cursor.toArray();
+        res.json(result);
+  })
+
+  // my booking delete api
+  app.delete('/mybooking/:email/:id',async(req,res)=>{
+    const email = req.params.email;
+    const id = req.params.id;
+    const query = {email:email, _id:ObjectId(id)};
+    const result = await bookingCollection.deleteOne(query);
+    res.json(result);
+  })
     
   
     } finally {
