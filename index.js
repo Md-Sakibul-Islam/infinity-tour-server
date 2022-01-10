@@ -29,7 +29,7 @@ async function run() {
   
       
     // GET API
-    // getting all tours destination 
+    // GETTING ALL TOURS DESTINATION
     app.get("/tours", async (req, res) => {
         const cursor = tourCollection.find({});
         const result = await cursor.toArray();
@@ -37,7 +37,8 @@ async function run() {
       });
 
       
-    // post api for new tour   
+    // POST API
+    //  FOR NEW TOUR   
     app.post ('/tours',async(req,res)=>{
         const tour = req.body;
         const doc = {
@@ -52,7 +53,8 @@ async function run() {
       })
 
        //GET API
-    // getting one tour destination from all tours destination 
+       //GETTING ONE TOUR DESTINATION FROM ALL TOURS DESTINATION 
+    
     app.get('/travelbooking/:id', async(req,res)=>{
         const id = req.params.id;
         const query = {_id:ObjectId(id)}
@@ -61,7 +63,8 @@ async function run() {
     })
 
 
-    // POST API  for booking 
+    // POST API 
+    //FOR BOOKING 
     app.post('/booking', async(req,res)=>{
         const booking = req.body;
         const doc = {
@@ -76,14 +79,16 @@ async function run() {
       })
 
       
-    //GET API all booking 
+    //GET API
+    // ALL BOOKING
     app.get('/allbooking', async(req,res)=>{
         const cursor = bookingCollection.find({});
         const result = await cursor.toArray();
         res.json(result);
       })
 
-       // all booking one item delete api 
+      //DELETE API
+       // ALL BOOKING ONE ITEM DELETE API
     app.delete('/allbooking/:id',async(req,res)=>{
         const id = req.params.id;
         const query = {_id:ObjectId(id)}
@@ -91,7 +96,8 @@ async function run() {
         res.json(result)
       })
 
-      // GET API my booking
+      // GET API
+      // MY BOOKING GET API
       app.get('/mybooking/:email',async(req,res)=>{
         const email = req.params.email
         const query = {email:email}
@@ -100,7 +106,8 @@ async function run() {
         res.json(result);
   })
 
-  //DELETE API my booking
+  //DELETE API
+  //  MY BOOKING DELETE API
   app.delete('/mybooking/:email/:id',async(req,res)=>{
     const email = req.params.email;
     const id = req.params.id;
