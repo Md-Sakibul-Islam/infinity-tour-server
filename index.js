@@ -36,6 +36,20 @@ async function run() {
         res.json(result);
       });
 
+      
+    // post api for new tour   
+    app.post ('/tours',async(req,res)=>{
+        const tour = req.body;
+        const doc = {
+          img:tour.img,
+          title:tour.title,
+          describe:tour.describe,
+          price:tour.price
+        }
+        const result = await tourCollection.insertOne(doc);
+  
+        res.send(result)
+      })
 
        //GET API
     // getting one tour destination from all tours destination 
@@ -47,7 +61,7 @@ async function run() {
     })
 
 
-    // post api for booking 
+    // POST API  for booking 
     app.post('/booking', async(req,res)=>{
         const booking = req.body;
         const doc = {
@@ -62,13 +76,22 @@ async function run() {
       })
 
       
-    // all booking get api 
+    //GET API all booking 
     app.get('/allbooking', async(req,res)=>{
         const cursor = bookingCollection.find({});
         const result = await cursor.toArray();
         res.json(result);
       })
 
+       // all booking one item delete api 
+    app.delete('/allbooking/:id',async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id:ObjectId(id)}
+        const result = await bookingCollection.deleteOne(query)
+        res.json(result)
+      })
+
+      // GET API my booking
       app.get('/mybooking/:email',async(req,res)=>{
         const email = req.params.email
         const query = {email:email}
@@ -77,7 +100,7 @@ async function run() {
         res.json(result);
   })
 
-  // my booking delete api
+  //DELETE API my booking
   app.delete('/mybooking/:email/:id',async(req,res)=>{
     const email = req.params.email;
     const id = req.params.id;
